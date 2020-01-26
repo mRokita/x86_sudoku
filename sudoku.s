@@ -147,7 +147,7 @@ _check_col_ret_passed:
 ; DI - X
 ; SI - Y
 ; DX - Wartość sprawdzana
-; AX - CHECK_PASSED, jeśli można, CHECK_FAILED, jeśli nie
+; AX - CHECK_PASSED, jeśli można, CHECK_FAILED, jeśli niehttps://www.facebook.com/
 check_row:
     ; R8W - sprawdzany X
     xor r8, r8
