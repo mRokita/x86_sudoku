@@ -21,8 +21,7 @@ get_cell_value:
     mov cx, word 9      ; Mnożnik - 9
     mul cx              ; Faktyczne mnożenie
     add ax, di          ; Dodanie X do adresu
-    shl ax, 2
-    mov ax, [r13+rax]   ; Wyciągnięcie wartości z adresu i wrzucenie do AX
+    mov al, [r13+rax]   ; Wyciągnięcie wartości z adresu i wrzucenie do AX
     mov dx, r12w
     ret
 
@@ -37,8 +36,7 @@ set_cell_value:
     mov cx, word 9      ; Mnożnik - 9
     mul cx              ; Faktyczne mnożenie
     add ax, di          ; Dodanie X do adresu
-    shl ax, 2
-    mov [r13+rax], r12w   ; Wyciągnięcie wartości z adresu i wrzucenie do AX
+    mov [r13+rax], r12b
     mov dx, r12w
     xor rax, rax        ; Zerowanie rax
     ret
@@ -102,13 +100,13 @@ _check_box_ret_failed:
     xor rax, rax
     mov si, r9w
     mov di, r8w
-    mov ax, CHECK_FAILED
+    mov al, CHECK_FAILED
     ret
 _check_box_ret_passed:
     xor rax, rax
     mov si, r9w
     mov di, r8w
-    mov ax, CHECK_PASSED
+    mov al, CHECK_PASSED
     ret
 
 ; [[ Funkcja sprawdzająca, czy wstawienie wartości DX do komórki (DI, SI) jest możliwe (po kolumnie)]]
@@ -136,12 +134,12 @@ _check_col_loop_scroll_end:
 _check_col_ret_failed:
     xor rax, rax
     mov si, r8w
-    mov ax, CHECK_FAILED
+    mov al, CHECK_FAILED
     ret
 _check_col_ret_passed:
     xor rax, rax
     mov si, r8w
-    mov ax, CHECK_PASSED
+    mov al, CHECK_PASSED
     ret
 
 
