@@ -85,12 +85,10 @@ _check_box_skip_row_inc:
     ; Sprawdzona całość, zwracamy CHECK_PASSED
     jmp _check_box_ret_passed
 _check_box_check_eq:
-c1:
     push eax
     call get_cell_value
     cmp al, dl
     pop eax
-c2:
     jne _check_box_loop_start
 _check_box_ret_failed:
     xor al, al
@@ -206,7 +204,6 @@ _guess_skip_inc_row:
 _guess_guessing_loop_start:
     inc dl
     cmp dl, 9
-b1:
     jg _guess_ret_failed
     call check_row
     cmp al, CHECK_PASSED
@@ -220,11 +217,9 @@ b1:
     cmp al, CHECK_PASSED
     jne _guess_guessing_loop_start
 
-b2:
     push eax
     call set_cell_value
     pop eax
-bbp:
 
     push edi
     push ebx
@@ -235,7 +230,6 @@ bbp:
     pop ecx
     pop ebx
     pop edi
-bap:
     cmp al, GUESS_PASSED
     jne _guess_guessing_loop_start
 _guess_ret_passed:
@@ -256,17 +250,18 @@ _guess_ret_failed:
 sudoku:
     push ebp;
     mov ebp, esp;
+    push ebx;
+    push edi;
     mov edi, [ebp+8] ; Przeniesienie adresu sudoku na edi
     xor ecx, ecx
     xor ebx, ebx ; Początkowa pozycja na zero
     xor edx, edx
     xor eax, eax
 
-     dec bl ; ustawienie na -1 do guess
-    ; Wywołanie guess
-    ; RDI - kolumna
-    ; RSI - wiersz
+    dec bl ; ustawienie na -1 do guess
     call guess
 end:
-    pop ebp
+    pop edi;
+    pop ebx;
+    pop ebp;
     ret
