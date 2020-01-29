@@ -235,6 +235,7 @@ _guess_guessing_loop_start:
 _guess_ret_passed:
     xor al, al
     mov al, GUESS_PASSED
+    mov esp, ebp
     pop ebp
     ret
 _guess_ret_failed:
@@ -244,6 +245,7 @@ _guess_ret_failed:
     pop eax
     xor al, al
     mov al, GUESS_FAILED
+    mov esp, ebp
     pop ebp
     ret
 
@@ -260,9 +262,9 @@ sudoku:
 
     dec bl ; ustawienie na -1 do guess
     call guess
-end:
     pop edi;
     pop ebx;
     mov esp, ebp
     pop ebp;
+end:
     ret
