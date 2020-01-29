@@ -263,5 +263,6 @@ sudoku:
 end:
     pop edi;
     pop ebx;
+    mov esp, ebp
     pop ebp;
     ret
